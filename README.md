@@ -39,36 +39,36 @@ $ visudo
 $ vi /etc/ssh/sshd_config
 ```
   * Change Port Number
-  ```
-  Port NewPortNumber
-  ```
+    ```
+    Port NewPortNumber
+    ```
   * Disable Root Login
-  ```
-  PermitRootLogin no
-  ```
+    ```
+    PermitRootLogin no
+    ```
   * Only allow specific users
-  ```
-  UseDNS no
-  AllowUsers newUserNmae
-  ```
+    ```
+    UseDNS no
+    AllowUsers newUserNmae
+    ```
   * Save and exit, then reload ssh
-  ``` sh
-  $ reload ssh
-  ```
+    ``` sh
+    $ reload ssh
+    ```
 4. Reset Timezone
-``` sh
-$ dpkg-reconfigure tzdata
-```
+  ``` sh
+  $ dpkg-reconfigure tzdata
+  ```
 5. Update System
-``` sh
-$ apt-get update
-```
-``` sh
-$ apt-get upgrade
-```
-``` sh
-$ apt-get dist-upgrade
-```
+  ``` sh
+  $ apt-get update
+  ```
+  ``` sh
+  $ apt-get upgrade
+  ```
+  ``` sh
+  $ apt-get dist-upgrade
+  ```
 
 ## System Installs & Configs
 
@@ -94,22 +94,26 @@ $ ufw allow youSSHPortNumber/tcp
 ``` sh
 $ ufw enable
 ```
+
 2. Install and Config Postfix
 ``` sh
 $ apt-get install postfix mailutils
 ```
   * Edit Postfix config file
-  ``` sh
-  $ vi /etc/postfix/main.cf
-  ```
+    ``` sh
+    $ vi /etc/postfix/main.cf
+    ```
+
     * Change ``` myhostname = localhost ``` to
     ```
     myhostname = YourMailServerHostName #ie. mail.exampleserver.com
     ```
+
     * Restart Postfix
     ``` sh
     $ service postfix restart
     ```
+    
 3. Install and Config Fail2Ban
   * Install Fail2Ban
     ``` sh
