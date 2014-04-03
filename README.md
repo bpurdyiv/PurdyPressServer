@@ -74,7 +74,7 @@ $ vi /etc/ssh/sshd_config
   ``` sh
   $ apt-get upgrade
   ```
-  
+
   ``` sh
   $ apt-get dist-upgrade
   ```
@@ -85,21 +85,27 @@ $ vi /etc/ssh/sshd_config
 ``` sh
 $ apt-get install ufw
 ```
+
 ``` sh
 $ ufw default deny incoming
 ```
+
 ``` sh
 $ ufw default allow outgoing
 ```
+
 ``` sh
 $ ufw allow 80/tcp
 ```
+
 ``` sh
 $ ufw allow 443/tcp
 ```
+
 ``` sh
 $ ufw allow youSSHPortNumber/tcp
 ```
+
 ``` sh
 $ ufw enable
 ```
@@ -128,23 +134,28 @@ $ apt-get install postfix mailutils
     ``` sh
     $ apt-get install fail2ban
     ```
+
   * Config Fail2Ban
     * Copy jail.conf to jail.local
       ``` sh
       $ cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
       ```
+
     * Edit jail.local
       ``` sh
       $ vi /etc/fail2ban/jail.local
       ```
+
       * Change Destemail
         ```
         destemail = your@email.com
         ```
+
       * Change Action replace ``` action = %(action_)s ``` to
         ```
         action = %(action_mwl)s
         ```
+
     * Restart Service
       ``` sh
       $ service fail2ban restart
@@ -155,54 +166,66 @@ $ apt-get install postfix mailutils
 ``` sh
 $ apt-get install curl git-core python-software-properties
 ```
+
 2. Install NginX
   * Add NginX Repo
     ``` sh
     $ add-apt-repository ppa:nginx/stable
     ```
+
   * Update Apt
     ``` sh
     $ apt-get update
     ```
+
   * Install NginX
   ```
   $ apt-get install nginx
   ```
+
 3. Install PHP 5.5
   * Add PHP Repo
     ``` sh
     $ add-apt-repository ppa:ondrej/php5
     ```
+
   * Update Apt
     ``` sh
     $ apt-get update
     ```
+
   * Install PHP and modules
     ``` sh
     $ apt-get install php5-common php5-fpm php5-mysqlnd php5-gd php5-xmlrpc php5-curl  php5-cli php-pear php5-imap php5-mcrypt php5-tidy
     ```
+
 4. Install MySQL
   * Using MariaDB instead of MySQL... To add current repo follow directions on [their site](https://downloads.mariadb.org/mariadb/repositories/). Current instructions as of 4/1/14 for version 10 below
     * Add Apt Key
       ``` sh
       $ apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
       ```
+
     * Add Repo
       ``` sh
       $ add-apt-repository 'deb http://mirrors.syringanetworks.net/mariadb/repo/10.0/ubuntu precise main'
       ```
+
     * Update Apt
       ``` sh
       $ apt-get update
       ```
+
     * Install
       ``` sh
       $ apt-get install mariadb-server
       ```
+
     * Run MySQL Secure Installation
       ``` sh
       $ mysql_secure_installation
       ```
+
 5. Install Rmate for editing with Sublime Text 3 (as of 4/1/14) https://github.com/henrikpersson/rsub https://github.com/aurora/rmate
 
   * Paste the following in the ssh config file on local machine
@@ -210,14 +233,17 @@ $ apt-get install curl git-core python-software-properties
     Host your_remote_server.com
         RemoteForward 52698 127.0.0.1:52698
     ```
+
   * ‘Install’ the rsub remote script
     ``` sh
     $ sudo wget -O /usr/local/bin/rsub https://raw.github.com/aurora/rmate/master/rmate
     ```
+
   * Make that script executable
     ``` sh
     $ sudo chmod +x /usr/local/bin/rsub
     ```
+
   * Lastly, run rsub on the remote file you want to edit locally
     ``` sh
     $ rsub ~/my_project/my_file.html
@@ -236,6 +262,7 @@ $ apt-get install curl git-core python-software-properties
     opcache.revalidate_freq=0
     opcache.consistency_checks=1
     ```
+
   * Install a Webviewer... or maybe New Relic
 
 2. Install and config Memcache https://rtcamp.com/tutorials/php/memcache/
@@ -243,30 +270,36 @@ $ apt-get install curl git-core python-software-properties
     ``` sh
     $ apt-get install memcached php5-memcache
     ```
+
   * Restart php5-fpm
     ``` sh
     $ service php5-fpm restart
     ```
+
   * Config  Max Memory
     * Open config File
       ```
       $ vi /etc/memcached.conf
       ```
+
     * Look for ``` -m 64 ``` Change to desired max memory ie. ``` -m 512 ```
     * Restart memcached
       ``` sh
       $ service memcached restart
       ```
+
   * Move PHP’s session storage to memcache
     * Open php-memcache config
       ``` sh
       $ vi /etc/php5/mods-available/memcache.ini
       ```
+
     * Add following lines
       ```
       session.save_handler = memcache
       session.save_path = "tcp://localhost:11211"
       ```
+
   * In w3-total-cache plugin you need to choose memcache as backend for object-cache and database-cache.
   * Install web viewer or maybe New Relic
 
@@ -279,6 +312,7 @@ $ apt-get install curl git-core python-software-properties
     ``` sh
     $ df -h /var/run
     ```
+
   * Will need to play with amount of system memory needed for this to work. If You do not have enough memory, then use a regular disk directory for cache storage....
   * Below is a NginX server config using the fastcgi_cache.
   ```
@@ -344,6 +378,7 @@ $ apt-get install curl git-core python-software-properties
   	location ~ /\. { deny  all; access_log off; log_not_found off; }
   }
   ```
+  
   * The line fastcgi_cache_path is where cache is stored. If limited memory use a disk directory.
   * The line fastcgi_cache_use_stale is what makes caching on Nginx-side unique. This line tells Nginx to use old (stale) cached version of page if PHP crashes. This is something not possible with WordPress caching plugins.
   * Test and reload nginx
