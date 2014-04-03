@@ -31,9 +31,11 @@ $ adduser newUserName
 $ visudo
 ```
   * Add following line below ``` root ALL+(ALL:ALL) ALL ```
+
   ```
   newUserName ALL=(ALL:ALL) ALL
   ```
+
 3. Reconfig SSH - Change respective setting to those below...
 ```sh
 $ vi /etc/ssh/sshd_config
@@ -42,30 +44,37 @@ $ vi /etc/ssh/sshd_config
     ```
     Port NewPortNumber
     ```
+
   * Disable Root Login
     ```
     PermitRootLogin no
     ```
+
   * Only allow specific users
     ```
     UseDNS no
     AllowUsers newUserNmae
     ```
+
   * Save and exit, then reload ssh
     ``` sh
     $ reload ssh
     ```
+
 4. Reset Timezone
   ``` sh
   $ dpkg-reconfigure tzdata
   ```
+
 5. Update System
   ``` sh
   $ apt-get update
   ```
+
   ``` sh
   $ apt-get upgrade
   ```
+  
   ``` sh
   $ apt-get dist-upgrade
   ```
@@ -113,7 +122,7 @@ $ apt-get install postfix mailutils
     ``` sh
     $ service postfix restart
     ```
-    
+
 3. Install and Config Fail2Ban
   * Install Fail2Ban
     ``` sh
