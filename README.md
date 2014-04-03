@@ -283,6 +283,7 @@ $ apt-get install curl git-core python-software-properties
       ```
 
     * Look for ``` -m 64 ``` Change to desired max memory ie. ``` -m 512 ```
+    
     * Restart memcached
       ``` sh
       $ service memcached restart
@@ -378,7 +379,7 @@ $ apt-get install curl git-core python-software-properties
   	location ~ /\. { deny  all; access_log off; log_not_found off; }
   }
   ```
-  
+
   * The line fastcgi_cache_path is where cache is stored. If limited memory use a disk directory.
   * The line fastcgi_cache_use_stale is what makes caching on Nginx-side unique. This line tells Nginx to use old (stale) cached version of page if PHP crashes. This is something not possible with WordPress caching plugins.
   * Test and reload nginx
